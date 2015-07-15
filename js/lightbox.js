@@ -1,5 +1,7 @@
 
-function() {
+
+
+(function() {
   var $, Lightbox, LightboxOptions;
 
   $ = jQuery;
