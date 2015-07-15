@@ -1,5 +1,5 @@
 
-img.onload=function() {
+function() {
   var $, Lightbox, LightboxOptions;
 
   $ = jQuery;
