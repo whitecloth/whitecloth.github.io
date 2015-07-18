@@ -80,7 +80,7 @@ Users.on("value", function (data){
 	UserList = data.val();
 })
 
-Users.on("child_added", function (snapshot)
+Users.on("child_changed", function (snapshot)
 {
 	var data = snapshot.val();
     var name = data.name;
