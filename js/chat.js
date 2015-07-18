@@ -91,6 +91,17 @@ Users.on("child_added", function (snapshot)
     userList.append(nameElement);
 });
 
+Users.on("child_removed", function (snapshot)
+{
+	var data = snapshot.val();
+    var name = data.name;
+
+    var nameElement = $("<li></li>");
+    nameElement.text(name);
+
+    userList.append(nameElement);
+});
+
 function logout()
 {
 	if (now === true)
