@@ -58,6 +58,7 @@ function Login()
 	now = true;
 	var username = Name.val();
 	Users.push({name:username});
+	console.log(UserList);
 }
 
 function Logout()
@@ -78,28 +79,15 @@ function Logout()
 
 Users.on("value", function (data){
 	UserList = data.val();
-})
+	userList.html("");
+	for(x in UserList){
+		var name = UserList[x].name;
 
-Users.on("child_added", function (snapshot)
-{
-	var data = snapshot.val();
-    var name = data.name;
+		var nameElement = $("<li></li>");
+		nameElement.text(name);
 
-    var nameElement = $("<li></li>");
-    nameElement.text(name);
-
-    userList.append(nameElement);
-});
-
-Users.on("child_removed", function (snapshot)
-{
-	var data = snapshot.val();
-    var name = data.name;
-
-    var nameElement = $("<li></li>");
-    nameElement.text(name);
-
-    userList.append(nameElement);
+		userList.append(nameElement);
+	}
 });
 
 function logout()
