@@ -5,10 +5,13 @@ var Name = $("#name");
 var messageList = $("#chat-messages");
 var userList = $("#char-users");
 var login = $("#login")
+var logout = $("#logout")
 
 var Messages = Room.child("Messages");
 var Users = Room.child("Users");
 var UserList;
+
+var now = false;
 
 Message.keypress(function (e) 
 {
@@ -51,8 +54,26 @@ function Login()
 	Name.attr("disabled", true);
 	Message.attr("disabled", false);
 	login.attr("disabled", true);
+	logout.attr("disabled", false);
+	now = true;
 	var username = Name.val();
 	Users.push({name:username});
+}
+
+function Logout()
+{
+	for (var attr in UserList)
+	{
+		if (Name.val() === UserList[attr].name)
+		{
+			Users.child(attr).remove();
+		}
+	}
+	Name.attr("disabled", false);
+	Message.attr("disabled", true);
+	login.attr("disabled", false);
+	logout.attr("disabled", true);
+	now = false;
 }
 
 Users.on("value", function (data){
@@ -72,11 +93,14 @@ Users.on("child_added", function (snapshot)
 
 function logout()
 {
-	for (var attr in UserList)
+	if (now === true)
 	{
-		if (Name.val() === UserList[attr].name)
+		for (var attr in UserList)
 		{
-			Users.child(attr).remove();
+			if (Name.val() === UserList[attr].name)
+			{
+				Users.child(attr).remove();
+			}
 		}
 	}
 }
