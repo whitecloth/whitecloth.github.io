@@ -86,22 +86,25 @@ Users.on("value", function (data){
 		var nameElement = $("<li></li>");
 		nameElement.text(name);
 
-		userList.append(nameElement);
+		userList.append(nameElement);	
 	}
 });
 
-function logout()
+function close()
 {
-	for (var attr in UserList)
+	if (now === true)
 	{
-		if (Name.val() === UserList[attr].name)
+		for (var attr in UserList)
 		{
-			Users.child(attr).remove();
+			if (Name.val() === UserList[attr].name)
+			{
+				Users.child(attr).remove();
+			}
 		}
 	}
 }
 
 window.onunload = function()
 {
-	logout();
+	close();
 }
