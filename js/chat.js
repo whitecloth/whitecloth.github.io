@@ -92,14 +92,11 @@ Users.on("value", function (data){
 
 function logout()
 {
-	if (now === true)
+	for (var attr in UserList)
 	{
-		for (var attr in UserList)
+		if (Name.val() === UserList[attr].name)
 		{
-			if (Name.val() === UserList[attr].name)
-			{
-				Users.child(attr).remove();
-			}
+			Users.child(attr).remove();
 		}
 	}
 }
